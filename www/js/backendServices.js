@@ -1,10 +1,11 @@
 angular.module('starter.backendServices', [])
 
 .factory("Quests", function($firebaseArray) {
+
+
   var itemsRef = new Firebase("https://sizzling-fire-9071.firebaseio.com/quests");
   return $firebaseArray(itemsRef);
 })
-
 
 .factory("Users", ['$q', function($q){
   var Users = {};
@@ -12,7 +13,7 @@ angular.module('starter.backendServices', [])
   Users.createUser = function(username, password) {
     var ref = new Firebase("https://sizzling-fire-9071.firebaseio.com");
     ref.createUser({
-      email: username,
+      email: username + "@battlehack2015.com",
       password: password
     }, function(error, userData) {
       if (error) {
@@ -32,7 +33,7 @@ angular.module('starter.backendServices', [])
         console.log("Successfully created user account with uid:", userData.uid);
       }
     });
-    return d.promise();
+    return d.promise;
   };
 
 
@@ -40,7 +41,7 @@ angular.module('starter.backendServices', [])
       var d = $q.defer();
       var ref = new Firebase("https://sizzling-fire-9071.firebaseio.com");
       ref.authWithPassword({
-        "email": username,
+        "email": username + "@battlehack2015.com",
         "password": password
       }, function(error, authData) {
         if (error) {
@@ -58,24 +59,3 @@ angular.module('starter.backendServices', [])
     return Users;
 
   }]);
-// .factory('Firebase', function(){
-//   var Firebase = {};
-//
-//   Firebase.getUserDetails = function(username, password) {
-//     // Get user from mogo db.
-//
-//     var userDetails = {
-//       name: "Pranav Moktali",
-//       email: "pranav.moktali@gmail.com",
-//       phone: "1232122",
-//       username: "mokpro"
-//     };
-//
-//     return userDetails;
-//   };
-//
-//   Firebase.getQuests = function(username) {
-//     // get quests from browser
-//   }
-//   return Firebase;
-// });
